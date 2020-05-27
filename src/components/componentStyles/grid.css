@@ -1,0 +1,107 @@
+.calWrapper {
+  border: 2px solid black;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-auto-rows: minmax(100px, auto); */
+  margin: 0 auto;
+
+  grid-template-areas:
+    "display display display display"
+    "clearBtn clearBtn percentBtn divisonBtn"
+    "sevenBtn eightBtn nineBtn multiplyBtn"
+    "fourBtn fiveBtn sixBtn subtractBtn"
+    "oneBtn twoBtn threeBtn additionBtn"
+    "zeroBtn zeroBtn dotBtn equalBtn";
+}
+
+.btn {
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  font-size: 1.4rem;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.display {
+  grid-area: display;
+  background-color: black;
+  color: white;
+}
+
+.clearBtn {
+  grid-area: clearBtn;
+}
+
+.percentBtn {
+  grid-area: percentBtn;
+}
+
+.divisonBtn {
+  grid-area: divisonBtn;
+  background-color: orange;
+}
+
+.sevenBtn {
+  grid-area: sevenBtn;
+}
+
+.eightBtn {
+  grid-area: eightBtn;
+}
+
+.nineBtn {
+  grid-area: nineBtn;
+}
+
+.multiplyBtn {
+  grid-area: multiplyBtn;
+  background-color: orange;
+}
+
+.fourBtn {
+  grid-area: fourBtn;
+}
+
+.fiveBtn {
+  grid-area: fiveBtn;
+}
+
+.sixBtn {
+  grid-area: sixBtn;
+}
+
+.subtractBtn {
+  grid-area: subtractBtn;
+  background-color: orange;
+}
+
+.oneBtn {
+  grid-area: oneBtn;
+}
+
+.twoBtn {
+  grid-area: twoBtn;
+}
+
+.threeBtn {
+  grid-area: threeBtn;
+}
+
+.additionBtn {
+  grid-area: additionBtn;
+  background-color: orange;
+}
+
+.zeroBtn {
+  grid-area: zeroBtn;
+}
+
+.dotBtn {
+  grid-area: dotBtn;
+}
+
+.equalBtn {
+  grid-area: equalBtn;
+  background-color: orange;
+}

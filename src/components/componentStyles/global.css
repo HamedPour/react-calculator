@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  max-width: 1024px;
+}
+
+/* Mobile First development - screens up to   */
+
+html {
+  padding-top: 30vh;
+  margin: 0 auto;
+}
+
+/* Screens 411 to 1024 */
+@media screen and (min-width: 411px) {
+  html {
+    max-width: 600px;
+  }
+}
+
+/* Screens 1024 and above */
+@media screen and (min-width: 1024px) {
+  html {
+  }
+}
