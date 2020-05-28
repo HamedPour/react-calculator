@@ -2,7 +2,6 @@
   border: 2px solid black;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* grid-auto-rows: minmax(100px, auto); */
   margin: 0 auto;
 
   grid-template-areas:
@@ -24,11 +23,22 @@
 
 .display {
   grid-area: display;
-  padding: 25px 15px;
+  background-color: black;
   text-align: right;
+  padding: 0px 15px;
+}
+
+.display input {
   font-size: 2.8rem;
+  text-align: right;
+  padding: 25px 15px;
   background-color: black;
   color: white;
+}
+
+.display input::placeholder {
+  color: white;
+  opacity: 1;
 }
 
 .clickAble:hover {
