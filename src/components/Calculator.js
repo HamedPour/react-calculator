@@ -8,7 +8,7 @@ class Calculator extends React.Component {
     this.state = {
       display: "",
       previousNum: 0,
-      previousOperation: "add",
+      previousOperation: "",
       resetDisplayOnNextClick: false,
     };
   }
@@ -23,25 +23,32 @@ class Calculator extends React.Component {
   }
 
   operation(anOperation) {
-    //Capture the current number on display ans save it in num1
+    this.setState({ resetDisplayOnNextClick: true });
     const num1 = parseFloat(this.state.display);
     const num2 = this.state.previousNum;
     let result = 0;
     let previousOperation = this.state.previousOperation;
     switch (anOperation) {
       case "add":
-        this.setState({ resetDisplayOnNextClick: true });
         result = num1 + num2;
-        previousOperation = "add";
+        console.log(result);
+
+        this.setState({ previousOperation: "add" });
         break;
 
       case "subtract":
+        console.log("sub in Switch");
+        console.log("num1", num1);
+        console.log("num2", num2);
+        result = this.subtractNumbers(num1, num2);
+        this.setState({ previousOperation: "subtract" });
         break;
 
       case "multiply":
         break;
 
       case "divide":
+        // dont forget divison by zero errors !!!!!!!!!!!!!!!!!
         break;
 
       case "clear":
@@ -53,28 +60,42 @@ class Calculator extends React.Component {
         break;
     }
 
-    console.log("anOperation", anOperation);
-    console.log("prevousOperation", previousOperation);
-
     if (anOperation === "equal") {
       if (previousOperation === "add") {
         result = num1 + num2;
-        this.setState(
-          { display: result, previousNum: 0, resetDisplayOnNextClick: true },
-          () => {
-            console.log("HERE");
-            return;
-          }
-        );
+      } else if (previousOperation === "subtract") {
+        console.log("sub after equal");
+        console.log("num1", num1);
+        console.log("num2", num2);
+        result = this.subtractNumbers(num1, num2);
       }
+      this.setState({
+        display: result,
+        previousNum: 0,
+      });
     } else {
       this.setState({ previousNum: result });
     }
+  }
 
-    // EVERYTHING HAPPENS HERE
-    // console.log("num1", num1);
-    // console.log("num2", num2);
-    // console.log("result", result);
+  subtractNumbers(A, B) {
+    // Zero is such a pain
+    if (A === 0 && B === 0) return 0;
+    if (A === 0 && B > 0) return -B;
+    if (A === 0 && B < 0) return -B;
+    if (A > 0 && B === 0) return A;
+    if (A < 0 && B === 0) return A;
+    // +A, +B
+    if (A > 0 && B > 0) {
+      if (A > B) return A - Math.abs(B);
+      return -Math.abs(A - Math.abs(B));
+    }
+    // +A, -B
+    if (A > 0 && B < 0) return A + Math.abs(B);
+    // -A, +B
+    if (A < 0 && B > 0) return -(Math.abs(A) + B);
+    // -A, -B
+    if (A < 0 && B < 0) return -(Math.abs(A) - Math.abs(B));
   }
 
   render() {
