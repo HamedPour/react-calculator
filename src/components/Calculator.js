@@ -7,75 +7,74 @@ class Calculator extends React.Component {
     super();
     this.state = {
       display: "",
-      errFlag: false,
-      num1: 0,
-      num2: 0,
+      previousNum: 0,
+      previousOperation: "add",
+      resetDisplayOnNextClick: false,
     };
   }
-
-  decimalError() {
-    this.setState({ display: "Err" }, () => {
-      this.setState({ errFlag: true });
-    });
-  }
-
-  castDisplayToFloat() {
-    if (this.state.display.split(".").length > 2) {
-      this.decimalError();
-    }
-    return parseFloat(this.state.display);
-  }
-
   numKeyInput(aNumber) {
-    if (this.state.errFlag) {
-      this.setState({
-        display: "",
-        errFlag: false,
+    if (this.state.resetDisplayOnNextClick) {
+      this.setState({ display: "", resetDisplayOnNextClick: false }, () => {
+        this.setState({ display: this.state.display + aNumber });
       });
     } else {
-      this.setState({ ...this.state, display: this.state.display + aNumber });
+      this.setState({ display: this.state.display + aNumber });
     }
   }
 
   operation(anOperation) {
-    let number1 = this.castDisplayToFloat();
-    let number2 = parseFloat(this.state.num2);
+    //Capture the current number on display ans save it in num1
+    const num1 = parseFloat(this.state.display);
+    const num2 = this.state.previousNum;
     let result = 0;
+    let previousOperation = this.state.previousOperation;
     switch (anOperation) {
       case "add":
-        console.log(number1, number2, result);
-        result = number1 + number2;
-        this.setState({
-          display: result,
-          num2: result,
-        });
+        this.setState({ resetDisplayOnNextClick: true });
+        result = num1 + num2;
+        previousOperation = "add";
         break;
 
       case "subtract":
-        console.log(anOperation);
-        return "subtraction";
+        break;
 
       case "multiply":
-        console.log(anOperation);
-        return "multiplication";
+        break;
 
       case "divide":
-        console.log(anOperation);
-        return "division";
-
-      case "equal":
-        // do something important here maybe
-        this.setState({ display: result, num2: result });
         break;
 
       case "clear":
         // Clear the display
         this.setState({ display: "" });
-        break;
+        return;
 
       default:
-        throw new Error("You cheeky little ...");
+        break;
     }
+
+    console.log("anOperation", anOperation);
+    console.log("prevousOperation", previousOperation);
+
+    if (anOperation === "equal") {
+      if (previousOperation === "add") {
+        result = num1 + num2;
+        this.setState(
+          { display: result, previousNum: 0, resetDisplayOnNextClick: true },
+          () => {
+            console.log("HERE");
+            return;
+          }
+        );
+      }
+    } else {
+      this.setState({ previousNum: result });
+    }
+
+    // EVERYTHING HAPPENS HERE
+    // console.log("num1", num1);
+    // console.log("num2", num2);
+    // console.log("result", result);
   }
 
   render() {
