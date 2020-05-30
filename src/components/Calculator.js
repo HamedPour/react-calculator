@@ -7,12 +7,18 @@ class Calculator extends React.Component {
     super();
     this.state = {
       display: "",
-      previousNum: 0,
+      carryNumber: null,
       previousOperation: "",
       resetDisplayOnNextClick: false,
     };
   }
   numKeyInput(aNumber) {
+    /* 
+      Input from number keys go throug this function.
+      Takes argument: aNumber - string [0-9 and dot]
+      Output: void -> sets state for display and resetDisplayOnNextClick.
+      **Sets resetDisplayOnNextClick to false once the display has been clearned
+    */
     if (this.state.resetDisplayOnNextClick) {
       this.setState({ display: "", resetDisplayOnNextClick: false }, () => {
         this.setState({ display: this.state.display + aNumber });
@@ -23,79 +29,78 @@ class Calculator extends React.Component {
   }
 
   operation(anOperation) {
+    /* 
+      Input from operation keys go through this funciton.
+        Also this function is in charge of determining which operation
+        is being carried out and executes the neccessary logic.
+
+        Takes arguemts: anOperation - String [add, subtract, divide, multiply,  equal, and clear]
+        output: void - Uses Swtich statement to determine which arithmetic operation to preform.
+    */
     this.setState({ resetDisplayOnNextClick: true });
-    const num1 = parseFloat(this.state.display);
-    const num2 = this.state.previousNum;
+    const num1 = this.state.carryNumber;
+    const num2 = parseFloat(this.state.display);
     let result = 0;
     let previousOperation = this.state.previousOperation;
+
     switch (anOperation) {
       case "add":
         result = num1 + num2;
-        console.log(result);
-
         this.setState({ previousOperation: "add" });
         break;
 
       case "subtract":
-        console.log("sub in Switch");
-        console.log("num1", num1);
-        console.log("num2", num2);
-        result = this.subtractNumbers(num1, num2);
+        if (this.state.carryNumber === null) {
+          result = num2;
+        } else {
+          result = num1 - num2;
+        }
         this.setState({ previousOperation: "subtract" });
         break;
 
       case "multiply":
+        if (this.state.carryNumber === null) {
+          result = num2;
+        } else {
+          result = num1 * num2;
+        }
+        this.setState({ previousOperation: "multiply" });
         break;
 
       case "divide":
-        // dont forget divison by zero errors !!!!!!!!!!!!!!!!!
+        if (this.state.carryNumber === null) {
+          result = num2;
+        } else {
+          result = num1 / num2;
+        }
+        this.setState({ previousOperation: "divide" });
         break;
 
       case "clear":
         // Clear the display
-        this.setState({ display: "" });
+        this.setState({ display: "", carryNumber: null });
+        return;
+
+      case "equal":
+        if (previousOperation === "add") {
+          result = num1 + num2;
+        } else if (previousOperation === "subtract") {
+          result = num1 - num2;
+        } else if (previousOperation === "multiply") {
+          result = num1 * num2;
+        } else if (previousOperation === "divide") {
+          result = num1 / num2;
+        }
+        this.setState({ display: result, carryNumber: null });
         return;
 
       default:
         break;
     }
-
-    if (anOperation === "equal") {
-      if (previousOperation === "add") {
-        result = num1 + num2;
-      } else if (previousOperation === "subtract") {
-        console.log("sub after equal");
-        console.log("num1", num1);
-        console.log("num2", num2);
-        result = this.subtractNumbers(num1, num2);
-      }
-      this.setState({
-        display: result,
-        previousNum: 0,
-      });
-    } else {
-      this.setState({ previousNum: result });
-    }
-  }
-
-  subtractNumbers(A, B) {
-    // Zero is such a pain
-    if (A === 0 && B === 0) return 0;
-    if (A === 0 && B > 0) return -B;
-    if (A === 0 && B < 0) return -B;
-    if (A > 0 && B === 0) return A;
-    if (A < 0 && B === 0) return A;
-    // +A, +B
-    if (A > 0 && B > 0) {
-      if (A > B) return A - Math.abs(B);
-      return -Math.abs(A - Math.abs(B));
-    }
-    // +A, -B
-    if (A > 0 && B < 0) return A + Math.abs(B);
-    // -A, +B
-    if (A < 0 && B > 0) return -(Math.abs(A) + B);
-    // -A, -B
-    if (A < 0 && B < 0) return -(Math.abs(A) - Math.abs(B));
+    this.setState({
+      display: result,
+      carryNumber: result,
+    });
   }
 
   render() {
