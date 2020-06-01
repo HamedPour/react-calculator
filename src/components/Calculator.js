@@ -15,7 +15,7 @@ class Calculator extends React.Component {
   numKeyInput(aNumber) {
     /* 
       Input from number keys go throug this function.
-      Takes argument: aNumber - string [0-9 and dot]
+      Input: aNumber - string [0-9 and dot]
       Output: void -> sets state for display and resetDisplayOnNextClick.
       **Sets resetDisplayOnNextClick to false once the display has been clearned
     */
@@ -82,6 +82,12 @@ class Calculator extends React.Component {
         return;
 
       case "equal":
+        /**
+         * This is fired whenever the user clicks on the equals operator.
+         * It checks to see which operation was last used and then preforms
+         * the corresponding calculation and once finished sets the state's
+         * carryNumber to null to prepare for the next operations
+         */
         if (previousOperation === "add") {
           result = num1 + num2;
         } else if (previousOperation === "subtract") {
