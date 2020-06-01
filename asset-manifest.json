@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/HamedPour.github.io/react-calculator/static/css/main.2c17dd2b.chunk.css",
+    "main.js": "/HamedPour.github.io/react-calculator/static/js/main.b758660e.chunk.js",
+    "main.js.map": "/HamedPour.github.io/react-calculator/static/js/main.b758660e.chunk.js.map",
+    "runtime-main.js": "/HamedPour.github.io/react-calculator/static/js/runtime-main.3a867422.js",
+    "runtime-main.js.map": "/HamedPour.github.io/react-calculator/static/js/runtime-main.3a867422.js.map",
+    "static/js/2.2c1a688c.chunk.js": "/HamedPour.github.io/react-calculator/static/js/2.2c1a688c.chunk.js",
+    "static/js/2.2c1a688c.chunk.js.map": "/HamedPour.github.io/react-calculator/static/js/2.2c1a688c.chunk.js.map",
+    "index.html": "/HamedPour.github.io/react-calculator/index.html",
+    "precache-manifest.089a9b1253810fa7fc1f75ee43b89d46.js": "/HamedPour.github.io/react-calculator/precache-manifest.089a9b1253810fa7fc1f75ee43b89d46.js",
+    "service-worker.js": "/HamedPour.github.io/react-calculator/service-worker.js",
+    "static/css/main.2c17dd2b.chunk.css.map": "/HamedPour.github.io/react-calculator/static/css/main.2c17dd2b.chunk.css.map",
+    "static/js/2.2c1a688c.chunk.js.LICENSE.txt": "/HamedPour.github.io/react-calculator/static/js/2.2c1a688c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3a867422.js",
+    "static/js/2.2c1a688c.chunk.js",
+    "static/css/main.2c17dd2b.chunk.css",
+    "static/js/main.b758660e.chunk.js"
+  ]
+}
