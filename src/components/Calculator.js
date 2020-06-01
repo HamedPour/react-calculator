@@ -113,14 +113,12 @@ class Calculator extends React.Component {
     return (
       <>
         <div className="calWrapper">
-          <div className="display">
-            <input
-              className="btn"
-              readOnly
-              placeholder="0"
-              value={this.state.display}
-            />
-          </div>
+          <input
+            className=" display btn"
+            readOnly
+            placeholder="0"
+            value={this.state.display}
+          />
           <div
             className="btn clearBtn clickAble"
             onClick={() => {

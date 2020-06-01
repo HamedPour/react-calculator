@@ -2,7 +2,7 @@
   border: 2px solid black;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  margin: 0 auto;
+  margin: 0 auto 70px auto;
 
   grid-template-areas:
     "display display display display"
@@ -27,7 +27,7 @@
   grid-area: display;
   background-color: black;
   text-align: right;
-  padding: 0px 15px;
+  padding: 25px 15px;
 }
 
 .display input {
